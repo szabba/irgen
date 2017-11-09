@@ -1,4 +1,4 @@
-`irgen` is a code generator for Gang-of-Four visitors.
+`irgen` is a code generator for the visitees (elements) in the visitor pattern.
 
 Given a file `option.go` in the directory
 `$GOPATH/src/some-domain.org/option`
