@@ -47,9 +47,7 @@ func main() {
 	config.TypeNames.Consumer = flag.Arg(1)
 
 	var buf bytes.Buffer
-	config.Out = &buf
-
-	err := config.Generate()
+	err := config.Generate(&buf)
 	if err != nil {
 		log.Fatal(err)
 	}
