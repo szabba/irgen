@@ -11,13 +11,15 @@ import (
 	"go/parser"
 	"go/token"
 	"io"
-	"strings"
 
 	"github.com/pkg/errors"
 )
 
+// A configuration object specifying what to generate based on what.
 type Config struct {
-	Directory   string
+	// Path to the directory containing the code.
+	Directory string
+	//
 	PackageName string
 
 	TypeNames struct {
@@ -254,7 +256,7 @@ func (gen *generator) generateVariantType(compositeMethod, consumerMethod *ast.F
 	funtyp := compositeMethod.Type.(*ast.FuncType)
 	funtyp.Params.List[0].Names = []*ast.Ident{argName}
 
-	recvName := &ast.Ident{Name: strings.ToLower(gen.composite.Name.Name)}
+	recvName := &ast.Ident{Name: gen.composite.Name.Name}
 
 	// NOTE: See the note at the top of this function.
 	consumerMethodName := &ast.Ident{Name: consumerMethod.Names[0].Name}

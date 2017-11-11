@@ -32,3 +32,22 @@ func TestIntExpr(t *testing.T) {
 
 	config.compareOuputToReferenceFile(t, reference)
 }
+
+func TestTypes(t *testing.T) {
+	// irgen used to generate a receiver name that was the lowercase version
+	// of the composite type. This meant if the composite type name was an
+	// upper-case version of a Go keyword, the code would not compile.
+	// Therefore irgen now simply uses the type name. If that is not a valid
+	// type name that is the fault of the user, not irgen.
+
+	reference := filepath.FromSlash("./internal/test_cases/types/ref.go")
+
+	config := Config{
+		Directory:   filepath.FromSlash("internal/test_cases/types"),
+		PackageName: "types",
+	}
+	config.TypeNames.Composite = "Type"
+	config.TypeNames.Consumer = "TypeConsumer"
+
+	config.compareOuputToReferenceFile(t, reference)
+}
